@@ -6,20 +6,25 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
-        Schema::table('return_to_suppliers', function (Blueprint $table) {
-            $table->foreignId('purchase_id')->nullable()->after('supplier_id')->constrained()->nullOnDelete();
-        });
+        if (!Schema::hasColumn('return_to_suppliers', 'purchase_id')) {
+            Schema::table('return_to_suppliers', function (Blueprint $table) {
+                $table->foreignId('purchase_id')
+                      ->nullable()
+                      ->after('supplier_id')
+                      ->constrained()
+                      ->nullOnDelete();
+            });
+        }
     }
 
     public function down(): void
     {
-        Schema::table('return_to_suppliers', function (Blueprint $table) {
-            $table->dropConstrainedForeignId('purchase_id');
-        });
+        if (Schema::hasColumn('return_to_suppliers', 'purchase_id')) {
+            Schema::table('return_to_suppliers', function (Blueprint $table) {
+                $table->dropConstrainedForeignId('purchase_id');
+            });
+        }
     }
 };

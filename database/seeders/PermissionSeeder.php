@@ -50,7 +50,7 @@ class PermissionSeeder extends Seeder
             ['id' => 26, 'name' => 'settings.manage',     'module' => 'Settings',       'description' => 'Manage system-wide settings and permissions'],
         
             //Audit Logs
-            ['name' => 'audit.view', 'module' => 'Security', 'description' => 'View the system activity log'],
+            ['id' => 27, 'name' => 'audit.view', 'module' => 'Security', 'description' => 'View the system activity log'],
         ];
 
         foreach ($permissions as &$p) {
